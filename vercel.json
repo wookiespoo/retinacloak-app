@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "env": {
+    "VITE_SUPABASE_URL": "",
+    "VITE_SUPABASE_ANON_KEY": "",
+    "SUPABASE_URL": "",
+    "SUPABASE_SERVICE_ROLE_KEY": "",
+    "SOLANA_RPC_URL": ""
+  }
+}

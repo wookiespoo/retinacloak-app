@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+.glass-card {
+  @apply bg-white/10 backdrop-blur rounded-xl border border-white/15;
+}
+
+.page-bg {
+  background: linear-gradient(90deg, #2e1065, #0ea5e9);
+  position: relative;
+}
+.page-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(800px 300px at 10% 30%, #7c3aed55, transparent), radial-gradient(600px 260px at 85% 35%, #22d3ee44, transparent);
+  filter: blur(10px);
+  pointer-events: none;
+}
+.page-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px 220px at 0% 80%, #ff2a6d33, transparent), radial-gradient(600px 220px at 100% 80%, #60a5fa33, transparent);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.panel-magenta {
+  background: radial-gradient(600px 200px at 10% 10%, #ff2a6d33, transparent), radial-gradient(600px 200px at 90% 90%, #ff2a6d22, transparent);
+}
+.panel-blue {
+  background: radial-gradient(600px 200px at 10% 10%, #3B82F633, transparent), radial-gradient(600px 200px at 90% 90%, #60A5FA22, transparent);
+}
+.panel-teal {
+  background: radial-gradient(600px 200px at 10% 10%, #14B8A633, transparent), radial-gradient(600px 200px at 90% 90%, #2DD4BF22, transparent);
+}
+
+.btn-neon-purple {
+  @apply px-4 py-2 rounded-xl text-white;
+  background: linear-gradient(90deg, #a855f7, #7c3aed);
+  box-shadow: 0 0 12px #a855f7aa;
+}
+.btn-neon-orange {
+  @apply px-4 py-2 rounded-xl text-white;
+  background: linear-gradient(90deg, #fb923c, #f97316);
+  box-shadow: 0 0 12px #fb923caa;
+}
+.btn-neon-blue {
+  @apply px-4 py-2 rounded-xl text-white;
+  background: linear-gradient(90deg, #60a5fa, #3b82f6);
+  box-shadow: 0 0 12px #60a5faaa;
+}
+
+.card-orange-magenta {
+  background: linear-gradient(180deg, #fb923c, #f43f5e);
+}
+.card-blue {
+  background: linear-gradient(180deg, #2563eb, #1e3a8a);
+}
+.card-teal {
+  background: linear-gradient(180deg, #0ea5a5, #0f766e);
+}
+
+.row-glass {
+  @apply rounded-lg border border-white/15 bg-white/10 px-3 py-2;
+}
+
+.log-box {
+  @apply rounded-xl border border-white/15 bg-white/10;
+}
