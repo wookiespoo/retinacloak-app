@@ -11,6 +11,7 @@ export default function BuyerPanel() {
   const [devMode, setDevMode] = useState<boolean>(true)
   const [feeLamports, setFeeLamports] = useState<number>(0)
   const [recipient, setRecipient] = useState<string>('')
+  const [balanceLamports, setBalanceLamports] = useState<number>(0)
   const { isLive, saleStartISO, durationSec, now } = useSale()
 
   const start = Date.parse(saleStartISO)
@@ -30,6 +31,16 @@ export default function BuyerPanel() {
       } catch {}
     })()
   }, [])
+
+  useEffect(() => {
+    ;(async () => {
+      if (!publicKey) { setBalanceLamports(0); return }
+      try {
+        const lamports = await connection.getBalance(publicKey)
+        setBalanceLamports(lamports)
+      } catch {}
+    })()
+  }, [publicKey, connection])
 
   const purchase = async () => {
     setStatus('')
@@ -71,6 +82,7 @@ export default function BuyerPanel() {
         </div>
       </div>
       <div className="text-sm text-white/80 mt-2" aria-label="Rules">Max 1 per wallet • Cooldown 10s</div>
+      <p className="mt-2 text-sm" aria-label="Balance">Balance: {(balanceLamports / LAMPORTS_PER_SOL).toFixed(2)} SOL</p>
       <button aria-label="Purchase" title={status || ''} className={`btn-neon-purple mt-4 ${(!publicKey || !isLive) ? 'opacity-60 cursor-not-allowed' : ''}`} disabled={!publicKey || !isLive} onClick={purchase}>Purchess</button>
       {status && <div className="mt-2 text-sm break-all" aria-live="polite">{status}</div>}
     </div>
