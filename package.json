@@ -4,14 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "dev:server": "tsx watch server/index.ts",
-    "dev:full": "powershell -Command \"Start-Job -ScriptBlock { npm run dev:server } ; npm run dev\"",
-    "regression:dev": "tsx scripts/regression-dev.ts",
-    "regression:cron": "tsx scripts/regression-cron.ts",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+  "dev": "vite",
+  "dev:server": "tsx watch server/index.ts",
+  "dev:full": "powershell -Command \"Start-Job -ScriptBlock { npm run dev:server } ; npm run dev\"",
+  "regression:dev": "tsx scripts/regression-dev.ts",
+  "regression:cron": "tsx scripts/regression-cron.ts",
+  "build": "tsc -b && vite build",
+  "lint": "eslint .",
+  "preview": "vite preview"
+  },
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
   },
   "dependencies": {
     "@solana/wallet-adapter-react": "^0.15.39",
