@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RetnaCloak Status</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      body{background:#0a0f1f;color:#e6e6e6;font-family:Inter,system-ui,Arial,sans-serif;margin:0;padding:40px}
+      .card{background:rgba(255,255,255,0.06);border:1px solid #1f2b4a;border-radius:12px;padding:24px;max-width:720px;margin:0 auto}
+      h1{color:#00ff9a;margin:0 0 16px;font-size:28px}
+      .row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid #1f2b4a}
+      .badge{padding:6px 10px;border-radius:999px;font-size:12px}
+      .ok{background:#00ff9a;color:#03151d}
+      .warn{background:#ffbf00;color:#03151d}
+      .muted{color:#9aa7bd}
+      a{color:#00ff9a;text-decoration:none}
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>RetnaCloak Status</h1>
+      <div class="row"><div>Website</div><div id="site" class="badge ok">Operational</div></div>
+      <div class="row"><div>API</div><div id="api" class="badge muted">Checking…</div></div>
+      <div class="row"><div>Database</div><div id="db" class="badge muted">Checking…</div></div>
+      <div class="row" style="border-bottom:1px solid #1f2b4a"><div>Details</div><div class="muted"><a href="/api/retna/health">/api/retna/health</a> · <a href="/api/retna/events">/api/retna/events</a></div></div>
+      <div style="padding-top:12px" class="muted">Last updated: <span id="ts"></span></div>
+    </div>
+    <script>
+      const setBadge = (el, ok) => {
+        el.textContent = ok ? 'Operational' : 'Degraded'
+        el.className = 'badge ' + (ok ? 'ok' : 'warn')
+      }
+      const ts = document.getElementById('ts'); ts.textContent = new Date().toLocaleString()
+      fetch('/api/retna/health').then(r=>r.json()).then(j=>{
+        setBadge(document.getElementById('api'), !!j.ok)
+      }).catch(()=>setBadge(document.getElementById('api'), false))
+      fetch('/api/retna/events').then(r=>r.json()).then(j=>{
+        const ok = Array.isArray(j.events)
+        setBadge(document.getElementById('db'), ok)
+      }).catch(()=>setBadge(document.getElementById('db'), false))
+    </script>
+  </body>
+  </html>
+
